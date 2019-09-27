@@ -4,6 +4,12 @@
   "rssInterval": 60000,
   "maxFeedAge": 2000000,
   "feedChannel": "rss",
-  "initialFeeds": ["https://rss.golem.de/rss.php?feed=RSS2.0"],
+  "initialFeeds": [
+    "https://rss.golem.de/rss.php?feed=RSS2.0",
+    "https://www.tomshardware.com/feeds/rss2/news.xml",
+    "https://t3n.de/tag/rss/rss.xml",
+    "https://www.gamestar.de/news/rss/news.rss",
+    "furz"
+  ],
   "feedColor": "0xFFA500"
 }
