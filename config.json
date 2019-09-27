@@ -1,0 +1,8 @@
+{
+  "prefix": "!",
+  "rssUserAgent": "DiscordRSSBotTest",
+  "rssInterval": 60000,
+  "maxFeedAge": 2000000,
+  "feedChannel": "rss",
+  "initalFeeds": ["https://rss.golem.de/rss.php?feed=RSS2.0"]
+}

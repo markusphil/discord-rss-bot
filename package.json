@@ -1,0 +1,20 @@
+{
+  "name": "rss-bot",
+  "version": "0.0.1",
+  "description": "This Bot allows you to manage and watch a list of feeds and text new messanges to your server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.1.0",
+    "eslint": "^6.4.0",
+    "rss-feed-emitter": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^6.3.0"
+  }
+}

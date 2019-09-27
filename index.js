@@ -1,7 +1,7 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const RSSFeedEmitter = require('rss-feed-emitter');
-const { prefix, rssUserAgent, rssInterval, feedChannel } = require('./config.json');
+const { prefix, rssUserAgent, rssInterval, feedChannel, maxFeedAge } = require('./config.json');
 
 //init discord.js
 
@@ -22,14 +22,18 @@ client.login(process.env.BOT_TOKEN);
 const feed = new RSSFeedEmitter({ userAgent: rssUserAgent });
 
 feed.on('new-item', item => {
-  const embed = new Discord.RichEmbed()
-    .setTitle(item.title)
-    .setURL(item.link)
-    .setFooter('new post from: ' + item.author)
-    .setColor(0x50c878)
-    .setTimestamp(item.pubDate);
+  const feedAge = Date.now() - item.pubDate;
+  console.log(feedAge);
 
-  rssChannel.send(embed);
+  if (feedAge < maxFeedAge) {
+    const embed = new Discord.RichEmbed()
+      .setTitle(item.title)
+      .setURL(item.link)
+      .setFooter('new post from: ' + item.author)
+      .setColor(0x50c878)
+      .setTimestamp(item.pubDate);
+    rssChannel.send(embed);
+  }
 });
 
 //listen to commands
