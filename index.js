@@ -1,7 +1,15 @@
 require('dotenv').config();
 const Discord = require('discord.js');
 const RSSFeedEmitter = require('rss-feed-emitter');
-const { prefix, rssUserAgent, rssInterval, feedChannel, maxFeedAge } = require('./config.json');
+const {
+  prefix,
+  rssUserAgent,
+  rssInterval,
+  feedChannel,
+  maxFeedAge,
+  initialFeeds,
+  feedColor,
+} = require('./config.json');
 
 //init discord.js
 
@@ -9,10 +17,25 @@ const client = new Discord.Client();
 
 let rssChannel = null;
 
+const discordErr = new Discord.RichEmbed().setColor(0xde1738).setTitle('ERROR!');
+
 client.once('ready', () => {
   console.log('Ready!');
   rssChannel = client.channels.find('name', feedChannel);
   rssChannel.send('I am alive!');
+  rssChannel.send('...loading inital feeds');
+
+  initialFeeds.forEach(feedURL => {
+    try {
+      feed.add({
+        url: feedURL,
+        refresh: rssInterval,
+      });
+    } catch (err) {
+      console.log(err);
+      rssChannel.send(discordErr.setDescription(err.message));
+    }
+  });
 });
 
 client.login(process.env.BOT_TOKEN);
@@ -23,14 +46,13 @@ const feed = new RSSFeedEmitter({ userAgent: rssUserAgent });
 
 feed.on('new-item', item => {
   const feedAge = Date.now() - item.pubDate;
-  console.log(feedAge);
 
   if (feedAge < maxFeedAge) {
     const embed = new Discord.RichEmbed()
       .setTitle(item.title)
       .setURL(item.link)
       .setFooter('new post from: ' + item.author)
-      .setColor(0x50c878)
+      .setColor(feedColor)
       .setTimestamp(item.pubDate);
     rssChannel.send(embed);
   }
@@ -63,11 +85,14 @@ client.on('message', message => {
         message.reply(rssLinks || 'ups I failed');
       } catch (err) {
         console.log(err);
+        rssChannel.send(discordErr.setDescription(err.message));
       }
     }
   } else if (command === 'list') {
     const list = feed.list();
-    message.reply(list);
+    console.log(list);
+    const rssLinks = list.map(item => item.url);
+    message.reply(rssLinks || 'ups I failed');
   } else {
     message.reply("I don't understand you, sorry!");
   }
