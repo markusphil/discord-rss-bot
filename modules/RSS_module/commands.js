@@ -3,19 +3,20 @@ const { initRssModule, startFeedEmitter, addFeed, listFeeds, removeFeed } = requ
 module.exports = {
   commands: [
     {
-      command: 'add',
+      name: 'add',
       use: '<URL, ?refreshInterval>',
       description: 'adds rss feed to watchlist',
       execute: addFeed,
     },
     {
-      command: 'list',
+      name: 'list',
       description: 'show all followed feeds',
       execute: listFeeds,
     },
     {
-      command: 'remove',
+      name: 'remove',
       use: '<URL>',
+      description: 'removes feed if exists',
       execute: removeFeed,
     },
   ],
