@@ -8,8 +8,7 @@
     "https://rss.golem.de/rss.php?feed=RSS2.0",
     "https://www.tomshardware.com/feeds/rss2/news.xml",
     "https://t3n.de/tag/rss/rss.xml",
-    "https://www.gamestar.de/news/rss/news.rss",
-    "furz"
+    "https://www.gamestar.de/news/rss/news.rss"
   ],
   "feedColor": "0xFFA500"
 }
