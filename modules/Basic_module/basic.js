@@ -1,3 +1,5 @@
+const { prefix } = require('../../config.json');
+
 const ping = payload => {
   payload.message.reply('Pong!');
 };
@@ -12,10 +14,10 @@ const help = payload => {
   console.log(payload.message.client);
   const { commands } = payload.message.client;
 
-  let info = payload.discordInfo.setTitle('To Help you:');
+  let info = payload.discordInfo.setTitle('Available Commands');
 
   commands.forEach(cmd => {
-    info.addField(cmd.use ? cmd.name + ' ' + cmd.use : cmd.name, cmd.description);
+    info.addField(cmd.use ? prefix + cmd.name + ' ' + cmd.use : prefix + cmd.name, cmd.description);
   });
 
   payload.message.author.send(info);

@@ -15,7 +15,7 @@ module.exports = {
     },
     {
       name: 'help',
-      description: 'list all available commands',
+      description: 'lists all available commands',
       execute: help,
     },
   ],
