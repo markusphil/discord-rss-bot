@@ -36,4 +36,4 @@ module.exports.ping = ping;
 module.exports.echo = echo;
 module.exports.help = help;
 
-// whith this basic setup you should allready be able to use most of discord.js' features =)
+// with this basic setup you should allready be able to use most of discord.js' features =)
